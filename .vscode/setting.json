@@ -14,15 +14,15 @@
       "error",
       {
         "groups": [
-          "builtin", // Built-in types are first
-          "external", // External libraries
-          "internal", // Internal modules
+          "builtin",
+          "external",
+          "internal",
           [
             "parent",
             "sibling"
-          ], // Parent and sibling types can be mingled together
-          "index", // Then the index file
-          "object" // Object imports
+          ],
+          "index",
+          "object"
         ],
         "newlines-between": "always",
         "pathGroups": [
