@@ -22,16 +22,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
-const formSchema = z.object({
-  email: z.string().email(),
-  name: z.string().min(1, "Required"),
-  password: z.string().min(8, "Minimum 8 characters"),
-});
+import { useRegister } from "../api/use-register";
+import { registerSchema } from "../schemas";
 
 export const SignUpCard = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { mutate } = useRegister();
+  const form = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       email: "",
       name: "",
@@ -39,8 +36,8 @@ export const SignUpCard = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log({ values });
+  const onSubmit = (values: z.infer<typeof registerSchema>) => {
+    mutate({ json: values });
   };
   return (
     <Card className="size-full border-none shadow-none md:w-[487px]">
@@ -71,6 +68,7 @@ export const SignUpCard = () => {
                       type="text"
                       placeholder="Enter your name"
                       {...field}
+                      autoComplete="name"
                     />
                   </FormControl>
                   <FormMessage />
@@ -87,6 +85,7 @@ export const SignUpCard = () => {
                       type="email"
                       placeholder="Enter your email"
                       {...field}
+                      autoComplete="email"
                     />
                   </FormControl>
                   <FormMessage />
@@ -103,6 +102,7 @@ export const SignUpCard = () => {
                       type="password"
                       placeholder="Enter your password"
                       {...field}
+                      autoComplete="current-password"
                     />
                   </FormControl>
                   <FormMessage />
