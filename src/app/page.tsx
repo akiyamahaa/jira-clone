@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
+import { createAdminClient } from "@/lib/appwrite";
 
 export default function Home() {
+  console.log(createAdminClient);
   return (
     <div className="space-x-4">
       <Button size={"xs"}>Primary</Button>
