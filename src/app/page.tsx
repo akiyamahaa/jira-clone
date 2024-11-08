@@ -1,15 +1,26 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { createAdminClient } from "@/lib/appwrite";
+import { useCurrent } from "@/features/auth/api/use-current";
+import { useLogout } from "@/features/auth/api/use-logout";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
-  console.log(createAdminClient);
+  const { data, isLoading } = useCurrent();
+  const router = useRouter();
+
+  const { mutate } = useLogout();
+
+  useEffect(() => {
+    if (!data && !isLoading) {
+      router.push("/sign-in");
+    }
+  }, [data]);
   return (
     <div className="space-x-4">
-      <Button size={"xs"}>Primary</Button>
-      <Button variant={"destructive"}>Destructive</Button>
-      <Button variant={"ghost"}>Ghost</Button>
-      <Button variant={"muted"}>Muted</Button>
-      <Button variant={"teritary"}>Teritary</Button>
+      This is Home Page....
+      <Button onClick={() => mutate()}>Logout</Button>
     </div>
   );
 }
