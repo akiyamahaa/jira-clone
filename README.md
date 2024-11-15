@@ -38,3 +38,8 @@ bun dev
 4. Setup workspace attribute
   - Create attribute 
     -  string - imageUrl - 14000000 - not required
+5. Create collection name 'members'
+  - userId 50 required
+  - workspaceId 50 required
+  - create permissions all for Users
+  - add member ID to env
