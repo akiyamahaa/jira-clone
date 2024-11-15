@@ -26,3 +26,15 @@ bun dev
 2. Setup Permissions
   - go to workspaces settings
   - add Users and tick all method 
+3. Setup Storage
+  - go to storage
+  - Create Bucket with name `images`
+  - Add ID to env
+  - go to images setting
+    - maximum file size 1 Megabytes
+    - allowed file: jpg png svg jpeg
+    - permisions -> USERS (ALL)
+    - 
+4. Setup workspace attribute
+  - Create attribute 
+    -  string - imageUrl - 14000000 - not required

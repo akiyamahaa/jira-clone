@@ -43,21 +43,20 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
   });
 
   const onSubmit = (values: z.infer<typeof createWorkspaceSchema>) => {
-    // const finalValues = {
-    //   ...values,
-    //   image: values.image instanceof File ? values.image : "",
-    // };
+    const finalValues = {
+      ...values,
+      image: values.image instanceof File ? values.image : "",
+    };
 
-    // mutate(
-    //   { form: finalValues },
-    //   {
-    //     onSuccess: ({ data }) => {
-    //       form.reset();
-    //       router.push(`/workspaces/${data.$id}`);
-    //     },
-    //   }
-    // );
-    mutate({ json: values });
+    mutate(
+      { form: finalValues },
+      {
+        onSuccess: ({ data }) => {
+          form.reset();
+          // router.push(`/workspaces/${data.$id}`);
+        },
+      }
+    );
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
