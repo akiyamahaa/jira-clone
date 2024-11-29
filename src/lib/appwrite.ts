@@ -1,6 +1,6 @@
 import "server-only"; // To protect information from client site
 
-import { Client, Storage, Users, Databases, Account } from "node-appwrite";
+import { Client, Account } from "node-appwrite";
 
 export async function createAdminClient() {
   const client = new Client()

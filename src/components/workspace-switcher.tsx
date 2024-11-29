@@ -4,9 +4,6 @@ import { useRouter } from "next/navigation";
 import { RiAddCircleFill } from "react-icons/ri";
 
 // import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
-import { useGetWorkspaces } from "@/features/workspaces/api/use-get-workspaces";
-// import { useCreateWorkspaceModal } from "@/features/workspaces/hooks/use-create-workspace-modal";
-
 import {
   Select,
   SelectContent,
@@ -14,9 +11,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { WorkspaceAvatar } from "./workspace-avatar";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+import { useGetWorkspaces } from "@/features/workspaces/api/use-get-workspaces";
+// import { useCreateWorkspaceModal } from "@/features/workspaces/hooks/use-create-workspace-modal";
 import { useCreateWorkspaceModal } from "@/features/workspaces/hooks/use-create-workspace-modal";
+import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+
+import { WorkspaceAvatar } from "./workspace-avatar";
 
 export const WorkspaceSwitcher = () => {
   const workspaceId = useWorkspaceId();
@@ -34,17 +34,17 @@ export const WorkspaceSwitcher = () => {
         <p className="text-xs uppercase text-neutral-500">Workspaces</p>
         <RiAddCircleFill
           onClick={open}
-          className="size-5 text-neutral-500 cursor-pointer hover:opacity-75 transition"
+          className="size-5 cursor-pointer text-neutral-500 transition hover:opacity-75"
         />
       </div>
       <Select onValueChange={onSelect} value={workspaceId}>
-        <SelectTrigger className="w-full bg-neutral-200 font-medium p-1">
+        <SelectTrigger className="w-full bg-neutral-200 p-1 font-medium">
           <SelectValue placeholder="No workspace selected" />
         </SelectTrigger>
         <SelectContent>
           {workspaces?.documents.map((workspace) => (
             <SelectItem key={workspace.$id} value={workspace.$id}>
-              <div className="flex justify-start items-center gap-3 font-medium">
+              <div className="flex items-center justify-start gap-3 font-medium">
                 <WorkspaceAvatar
                   name={workspace.name}
                   image={workspace.imageUrl}

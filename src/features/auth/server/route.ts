@@ -1,11 +1,13 @@
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { deleteCookie, setCookie } from "hono/cookie";
-import { loginSchema, registerSchema } from "../schemas";
-import { createAdminClient } from "@/lib/appwrite";
 import { ID } from "node-appwrite";
-import { AUTH_COOKIE } from "../constants";
+
+import { createAdminClient } from "@/lib/appwrite";
 import { sessionMiddleware } from "@/lib/session-middleware";
+
+import { AUTH_COOKIE } from "../constants";
+import { loginSchema, registerSchema } from "../schemas";
 
 const app = new Hono()
   .get("/current", sessionMiddleware, async (c) => {
@@ -23,7 +25,7 @@ const app = new Hono()
       httpOnly: true,
       secure: true,
       sameSite: "strict",
-      maxAge: 60 * 60 * 24 * 30, //month
+      maxAge: 60 * 60 * 24 * 30, // month
     });
 
     return c.json({ success: "ok" }, 200);
@@ -40,7 +42,7 @@ const app = new Hono()
       httpOnly: true,
       secure: true,
       sameSite: "strict",
-      maxAge: 60 * 60 * 24 * 30, //month
+      maxAge: 60 * 60 * 24 * 30, // month
     });
     return c.json({ success: "ok" });
   })

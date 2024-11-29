@@ -1,18 +1,16 @@
 "use client";
 
-import { z } from "zod";
-import { useRef } from "react";
-import Image from "next/image";
-import { ArrowLeftIcon, ImageIcon } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowLeftIcon, ImageIcon } from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useRef } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import { cn } from "@/lib/utils";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { DottedSeparator } from "@/components/dotted-separator";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
@@ -22,9 +20,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
+
+import { useUpdateWorkspace } from "../api/use-update-workspace";
 import { updateWorkspaceSchema } from "../schema";
 import { Workspace } from "../types";
-import { useUpdateWorkspace } from "../api/use-update-workspace";
 
 interface EditWorkspaceFormProps {
   onCancel?: () => void;
@@ -73,18 +74,16 @@ export const EditWorkspaceForm = ({
   };
 
   return (
-    <Card className="w-full h-full border-none shadow-none">
-      <CardHeader className="flex flex-row items-center gap-x-4 p-7 space-y-0">
+    <Card className="size-full border-none shadow-none">
+      <CardHeader className="flex flex-row items-center gap-x-4 space-y-0 p-7">
         <Button
           size="sm"
           variant="secondary"
           onClick={
-            onCancel
-              ? onCancel
-              : () => router.push(`/workspaces/${initialValues.$id}`)
+            onCancel || (() => router.push(`/workspaces/${initialValues.$id}`))
           }
         >
-          <ArrowLeftIcon className="size-4 mr-2" />
+          <ArrowLeftIcon className="mr-2 size-4" />
           Back
         </Button>
         <CardTitle className="text-xl font-bold">
@@ -118,7 +117,7 @@ export const EditWorkspaceForm = ({
                   <div className="flex flex-col gap-y-2">
                     <div className="flex items-center gap-x-5">
                       {field.value ? (
-                        <div className="size-[72px] relative rounded-md overflow-hidden">
+                        <div className="relative size-[72px] overflow-hidden rounded-md">
                           <Image
                             alt="Logo"
                             fill
@@ -156,7 +155,7 @@ export const EditWorkspaceForm = ({
                             disabled={isPending}
                             variant="destructive"
                             size="xs"
-                            className="w-fit mt-2"
+                            className="mt-2 w-fit"
                             onClick={() => {
                               field.onChange(null);
                               if (inputRef.current) {
@@ -172,7 +171,7 @@ export const EditWorkspaceForm = ({
                             disabled={isPending}
                             variant="teritary"
                             size="xs"
-                            className="w-fit mt-2"
+                            className="mt-2 w-fit"
                             onClick={() => inputRef.current?.click()}
                           >
                             Upload Image

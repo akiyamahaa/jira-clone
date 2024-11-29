@@ -1,8 +1,7 @@
 import Image from "next/image";
 
-import { cn } from "@/lib/utils";
-
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { cn } from "@/lib/utils";
 
 interface WorkspaceAvatarProps {
   image?: string;
@@ -27,7 +26,7 @@ export const WorkspaceAvatar = ({
 
   return (
     <Avatar className={cn("size-10 rounded-md", className)}>
-      <AvatarFallback className="text-white bg-blue-600 font-semibold text-lg uppercase rounded-md">
+      <AvatarFallback className="rounded-md bg-blue-600 text-lg font-semibold uppercase text-white">
         {name[0]}
       </AvatarFallback>
     </Avatar>

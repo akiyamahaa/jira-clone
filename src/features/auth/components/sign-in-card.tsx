@@ -19,8 +19,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import { loginSchema } from "../schemas";
 import { useLogin } from "../api/use-login";
+import { loginSchema } from "../schemas";
 
 export const SignInCard = () => {
   const { mutate, isPending } = useLogin();
